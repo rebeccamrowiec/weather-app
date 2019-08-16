@@ -5,7 +5,11 @@ import Weather from './Weather';
 class App extends React.Component {
 
   state = {
-    city: ''
+    city: '',
+    temperature: ''
+    // humidity: '',
+    // description: '',
+    // error: ''
   }
 
   onSearchSubmit = async (term) => {
@@ -21,11 +25,11 @@ class App extends React.Component {
     console.log(response);
 
     this.setState({
-    //   temperature: response.main.temp,
+      temperature: response.list[0].main.temp,
       city: response.city.name
-    //   humidity: response.main.humidity,
-    //   description: response.weather[0].description,
-    //   error: ""
+      // humidity: response.main.humidity,
+      // description: response.weather[0].description,
+      // error: ""
     })
   }
 
@@ -34,7 +38,7 @@ class App extends React.Component {
       <div>
         <SearchBar onSubmit={this.onSearchSubmit} />
         <Weather 
-          // temperature={this.state.temperature}
+          temperature={this.state.temperature}
           city={this.state.city}
           // humidity={this.state.humidity}
           // description={this.state.description}
