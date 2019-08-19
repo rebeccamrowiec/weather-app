@@ -43,10 +43,6 @@ class App extends React.Component {
 
     console.log(days);
 
-    // let peach = lemons.map((orange) => {
-    //   return orange.main.temp;
-    // });
-
 
     this.setState({
       temperatures: days,
@@ -78,6 +74,12 @@ class App extends React.Component {
 
 export default App;
   
+
+
+
+
+
+
 // render() {
 //   return (
 //     <div>
