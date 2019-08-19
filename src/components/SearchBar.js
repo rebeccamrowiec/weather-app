@@ -1,22 +1,13 @@
 import React from 'react';
 
 class SearchBar extends React.Component {
-  state = { term: '' };
+  state = { term: 'LONDON' };
 
   onFormSubmit = (event) => {
     event.preventDefault();
     this.props.onSubmit(this.state.term);
     this.setState({term: '' });
-    // console.log(this);
   };
-
-  // componentDidMount() {
-  //   this.getWeather('london')
-  // }
-
-  // Get weather data from api
-  // Returns back array of day forecasts
-  // [day1, day2, day3]
   
   render() {
     return (

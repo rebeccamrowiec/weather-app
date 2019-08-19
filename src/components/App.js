@@ -24,8 +24,33 @@ class App extends React.Component {
     // Format new object for return
     console.log(response);
 
+    let lemons = response.list;
+    let days = [];
+    let day = [];
+    for (let i = 0; i < lemons.length; i++) {
+      console.log(lemons[i]);
+      const temperature = lemons[i].main.temp;
+      const time = lemons[i].dt_txt;
+      day.push({
+        time,
+        temperature,
+      });
+      if (day.length === 8) {
+        days.push(day);
+        day = [];
+      }
+    }
+
+    console.log(days);
+
+    // let peach = lemons.map((orange) => {
+    //   return orange.main.temp;
+    // });
+
+
     this.setState({
-      temperature: response.list[0].main.temp,
+      temperatures: days,
+      // temperature: [lemons]main.temp,
       city: response.city.name
       // humidity: response.main.humidity,
       // description: response.weather[0].description,
@@ -35,86 +60,35 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{display: "flex"}}>
         <SearchBar onSubmit={this.onSearchSubmit} />
-        <Weather 
-          temperature={this.state.temperature}
-          city={this.state.city}
-          // humidity={this.state.humidity}
-          // description={this.state.description}
-          // error={this.state.error}
-        />
+        {!this.state.temperatures ? null : this.state.temperatures.map((day, index) => {
+          return(
+            <Weather
+              key={"weather_card_"+index}
+              day={day}
+              city={this.state.city}
+            />
+          )
+        })}
       </div>
     );
   }
 }
 
 export default App;
-
-
-
-  // state = {lat: null, errorMessage: ''};
-
-  // state = {
-  //   temperature: undefined,
-  //   city: undefined,
-  //   humidity: undefined,
-  //   description: undefined,
-  //   error: undefined
-  // }
-
-  // componentDidMount() {
-  //   window.navigator.geolocation.getCurrentPosition(
-  //     (position) => this.setState({ lat: position.coords.latitude }),
-  //     (err) => this.setState({ errorMessage: err.message })  
-  //   );
-  // }
-
-  // onSearchSubmit = async (e) => {
-  //   const city = e.target.elements.city.value;
-
-  //   e.preventDefault();
-
-  //   // Api call
-  //   const api_call = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=fbfa3fa9afec475a14c7cbe7fd5d785b`);
-
-  //   // Transform to json
-  //   const response = await api_call.json();
-    
-  //   // Format new object for return
-
-  //   console.log(response);
-
-  //   this.setState({
-  //     temperature: response.main.temp,
-  //     city: response.name,
-  //     humidity: response.main.humidity,
-  //     description: response.weather[0].description,
-  //     error: ""
-  //   })
-  // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const App = () => {
+  
+// render() {
 //   return (
-//     <div>Hi</div>
+//     <div>
+//       <SearchBar onSubmit={this.onSearchSubmit} />
+//       <Weather 
+//         temperature={this.state.temperature}
+//         city={this.state.city}
+//         // humidity={this.state.humidity}
+//         // description={this.state.description}
+//         // error={this.state.error}
+//       />
+//     </div>
 //   );
-// };
+// }
