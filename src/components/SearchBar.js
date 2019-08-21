@@ -13,7 +13,7 @@ class SearchBar extends React.Component {
     return (
       <div>
         <form onSubmit={this.onFormSubmit}>
-          <div>
+          <div className="search-bar">
             <label>Type in your location for the current forecast</label>
             <input 
               type="text"
@@ -23,7 +23,7 @@ class SearchBar extends React.Component {
           </div>
         </form>
 
-        <button type="submit"></button>
+        {/* <button type="submit"></button> */}
       </div>
     );
   }

@@ -1,17 +1,17 @@
 import React from 'react';
 
 class Weather extends React.Component {
-  render () {
+  render () { 
     const { day } = this.props;
 
     return (
-      <div style={{margin: 20, border: "2px solid black"}}>
+      <div className="weather-card">
         {day.map((slot, index) => {
           const {temperature, time} = slot;
           const celcius = temperature - 273.15;
           return(
-            <div style={{display: "flex", justifyContent: "space-between"}} key={"weather_reading_"+index}>
-              <b>{time}</b>
+            <div className="weather-reading" key={"weather_reading_"+index}>
+              <b>{time.toLocaleTimeString()}</b>
               <p>{Math.round(celcius)}</p>
             </div>
           );
@@ -29,5 +29,7 @@ export default Weather;
 {props.humidity && <p>Humidity: {props.humidity}</p>}
 {props.description && <p>Conditions:  {props.description}</p>}
 {props.error && <p>{props.error}</p>} */
+
+// style={{display: "flex", justifyContent: "space-between"}}
 
 // 5 days, every 3 hours, 8 items a day (40 items in array)

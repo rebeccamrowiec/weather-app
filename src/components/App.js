@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from './SearchBar';
 import Weather from './Weather';
+import './Weather.css';
 
 class App extends React.Component {
 
@@ -30,11 +31,20 @@ class App extends React.Component {
     for (let i = 0; i < lemons.length; i++) {
       console.log(lemons[i]);
       const temperature = lemons[i].main.temp;
-      const time = lemons[i].dt_txt;
+     
+      const apple = () => { 
+        const time = lemons[i].dt * 1000;
+        var d = new Date(time);
+        // console.log(d);
+        return d;
+      };
+     
+
       day.push({
-        time,
+        time: apple(),
         temperature,
       });
+
       if (day.length === 8) {
         days.push(day);
         day = [];
@@ -42,7 +52,6 @@ class App extends React.Component {
     }
 
     console.log(days);
-
 
     this.setState({
       temperatures: days,
@@ -56,17 +65,19 @@ class App extends React.Component {
 
   render() {
     return (
-      <div style={{display: "flex"}}>
+      <div className="app">
         <SearchBar onSubmit={this.onSearchSubmit} />
-        {!this.state.temperatures ? null : this.state.temperatures.map((day, index) => {
-          return(
-            <Weather
-              key={"weather_card_"+index}
-              day={day}
-              city={this.state.city}
-            />
-          )
-        })}
+        <div className="weather">
+          {!this.state.temperatures ? null : this.state.temperatures.map((day, index) => {
+            return(
+              <Weather
+                key={"weather_card_"+index}
+                day={day}
+                city={this.state.city}
+              />
+            )
+          })}
+        </div>
       </div>
     );
   }
