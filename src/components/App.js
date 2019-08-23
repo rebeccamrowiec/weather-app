@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchBar from './SearchBar';
 import Weather from './Weather';
-import './Weather.css';
+import './Weather.scss';
 
 class App extends React.Component {
 
