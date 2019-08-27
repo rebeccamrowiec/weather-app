@@ -9,6 +9,9 @@ class Weather extends React.Component {
         {day.map((slot, index) => {
           const {temperature, time} = slot;
           const celcius = temperature - 273.15;
+
+          
+
           return(
             <div className="weather-reading" key={"weather_reading_"+index}>
               <b>{time.toLocaleTimeString()}</b>
